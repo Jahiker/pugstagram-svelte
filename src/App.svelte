@@ -1,17 +1,19 @@
 <script>
+  import Header from "./components/Header.svelte";
+  import Timeline from "./components/Timeline.svelte";
+  import Sidebar from "./components/Sidebar.svelte";
+  import Main from "./components/Main.svelte";
 </script>
 
-<main>
-  <h1>Hello Pugstagram</h1>
-</main>
+<Header />
+<Main>
+  <Timeline />
+  <Sidebar />
+</Main>
 
 <style>
-  main {
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  :global(body) {
+    background-color: #676778;
+    color: #ffffff;
   }
 </style>
