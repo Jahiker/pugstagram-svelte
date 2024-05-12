@@ -1,5 +1,5 @@
-<main class="Main">
-  <div class="Main-container">
-    <slot><!-- optional fallback --></slot>
+<main class="main">
+  <div class="main__container container">
+    <slot/>
   </div>
 </main>
