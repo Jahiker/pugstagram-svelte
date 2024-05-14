@@ -23,20 +23,53 @@
 
 <style>
   .header {
+    background-color: white;
+    position: fixed;
     width: 100%;
+    border-bottom: 1px solid rgba(38, 38, 38, 0.4);
   }
-
+  .header__content {
+    grid-template-columns: minmax(auto, 936px);
+    display: grid;
+    justify-content: center;
+    background-color: white;
+  }
   .header__content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    padding: 0.5em;
+  }
+  .header ul {
+    list-style: none;
+  }
+  .header li {
+    display: inline-block;
+    margin: 0 0 0 1em;
   }
 
-  .header__content_nav > ul {
-    list-style: none;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    gap: 10px;
+  h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 28px;
+    color: black;
+    font-family: "Pacifico", cursive;
+    cursor: pointer;
+    position: relative;
+    background: #fff;
+    mix-blend-mode: multiply;
+    display: inline-block;
+  }
+
+  h1:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, #f09433, #bc1888);
+    mix-blend-mode: screen;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 </style>
