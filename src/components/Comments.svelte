@@ -1,15 +1,43 @@
+<script>
+  export let comments = [];
+
+  const addComment = (e) => {
+    const formData = new FormData(e.currentTarget);
+
+    let message = formData.get("comment");
+
+    if (!message) return;
+
+    const newComment = {
+      id: crypto.randomUUID(),
+      text: message,
+      username: "Pili1409",
+    };
+
+    comments = [...comments, newComment];
+
+    e.currentTarget.reset();
+  };
+</script>
+
 <div class="comments">
   <div class="comments__content">
-    <div class="comments__users">
-      <h3>Jahiker</h3>
-      <span>Hola Elmo</span>
-    </div>
+    {#if comments}
+      {#each comments as comment}
+        <div class="comments__users">
+          <h3>{comment.text}</h3>
+          <span>{comment.username}</span>
+        </div>
+      {/each}
+    {/if}
+
     <div class="comments__form">
-      <form>
+      <form on:submit|preventDefault={addComment}>
         <input
           type="text"
           class="comments__input"
           placeholder="Agregar comentario"
+          name="comment"
           id="comments__input"
         />
         <button type="submit">Post</button>

@@ -1,4 +1,5 @@
 <script>
+  import { blur } from "svelte/transition";
   import { Icon } from "svelte-icons-pack";
   import {
     FaSolidEllipsis,
@@ -6,25 +7,42 @@
     FaSolidPaperPlane,
     FaSolidBookmark,
   } from "svelte-icons-pack/fa";
+
   import Comments from "./Comments.svelte";
+  import Modal from "./Modal.svelte";
+  import Share from "./Share.svelte";
+
+  export let username;
+  export let location;
+  export let avatar;
+  export let photo;
+  export let postComment;
+  export let comments;
+
+  let isModal = false;
+
+  const handleClick = () => {
+    isModal = !isModal;
+  };
 </script>
 
 <div class="card">
+  {#if isModal}
+    <div transition:blur>
+      <Modal>
+        <Share on:click={handleClick} />
+      </Modal>
+    </div>
+  {/if}
   <div class="card__container">
     <div class="card__header">
       <div class="card__user">
         <figure>
-          <img
-            src="https://c.files.bbci.co.uk/14EC6/production/_124820758_pug1.jpg"
-            alt="Pug"
-            width="50"
-            height="auto"
-            loading="lazy"
-          />
+          <img src={avatar} alt="Pug" width="50" height="auto" loading="lazy" />
         </figure>
         <h2>
-          Elmo.pug
-          <span>Bogotá, Colombia</span>
+          {username}
+          <span>{location}</span>
         </h2>
       </div>
       <div class="card__settings">
@@ -34,20 +52,19 @@
 
     <div class="card__photo">
       <figure>
-        <img
-          src="https://c.files.bbci.co.uk/14EC6/production/_124820758_pug1.jpg"
-          alt="Pug"
-          width="500"
-          height="auto"
-          loading="lazy"
-        />
+        <img src={photo} alt="Pug" width="500" height="auto" loading="lazy" />
       </figure>
     </div>
 
     <div class="card__icons">
       <div class="card__icons_firts">
-        <Icon src={FaSolidHeart} />
-        <Icon src={FaSolidPaperPlane} />
+        <span>
+          <Icon src={FaSolidHeart} />
+        </span>
+
+        <span on:click={handleClick}>
+          <Icon src={FaSolidPaperPlane} />
+        </span>
       </div>
       <div class="card__icons_second">
         <Icon src={FaSolidBookmark} />
@@ -55,11 +72,11 @@
     </div>
 
     <div class="card__description">
-      <h3>elmo.pug</h3>
-      <span>Hola!!!</span>
+      <h3>{username}</h3>
+      <span>{postComment}</span>
     </div>
 
-    <Comments />
+    <Comments {comments} />
   </div>
 </div>
 
