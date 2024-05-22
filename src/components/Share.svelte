@@ -13,8 +13,10 @@
   <div class="share__content">
     <a
       href="http://www.facebook.com/sharer/sharer.php?&u=https://pugstagram.com"
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      <Icon src={FaBrandsFacebook} />
+      <Icon src={FaBrandsFacebook} color="#3b5998" />
       Compartir en Facebook
     </a>
   </div>
@@ -27,7 +29,7 @@
     background-color: white;
     margin: 0 0 2em 0;
     width: 300px;
-    height: 80px;
+    height: auto;
     position: absolute;
     top: 300px;
     left: 30%;
@@ -49,13 +51,9 @@
     display: flex;
     align-items: center;
     text-decoration: none;
+    gap: 10px;
     color: black;
     font-size: 14px;
     margin: 2em 0 0 0;
-  }
-  .share__content svg {
-    color: #3b5998;
-    margin: 0 0.5em 0 0;
-    font-size: 20px;
   }
 </style>

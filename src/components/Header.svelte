@@ -1,6 +1,8 @@
 <script>
   import { Icon } from "svelte-icons-pack";
   import { FaSolidHeart, FaSolidCircleUser } from "svelte-icons-pack/fa";
+
+  import { likeCount } from "../store";
 </script>
 
 <div class="header">
@@ -10,8 +12,9 @@
     </div>
     <div class="header__content_nav">
       <ul>
-        <li>
+        <li class="header__content_like_count">
           <Icon src={FaSolidHeart} />
+          <span>{$likeCount === 0 ? "" : $likeCount}</span>
         </li>
         <li>
           <Icon src={FaSolidCircleUser} />
@@ -46,6 +49,13 @@
   .header li {
     display: inline-block;
     margin: 0 0 0 1em;
+  }
+
+  .header li.header__content_like_count {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
   }
 
   h1 {

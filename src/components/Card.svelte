@@ -4,9 +4,13 @@
   import {
     FaSolidEllipsis,
     FaSolidHeart,
+    FaHeart,
     FaSolidPaperPlane,
     FaSolidBookmark,
+    FaBookmark,
   } from "svelte-icons-pack/fa";
+
+  import { likeCount } from "../store";
 
   import Comments from "./Comments.svelte";
   import Modal from "./Modal.svelte";
@@ -20,9 +24,17 @@
   export let comments;
 
   let isModal = false;
+  let like = false;
+  let bookmark = false;
 
   const handleClick = () => {
     isModal = !isModal;
+  };
+
+  const handleLike = () => {
+    like = !like;
+
+    likeCount.update((n) => (like ? n + 1 : n - 1));
   };
 </script>
 
@@ -51,23 +63,26 @@
     </div>
 
     <div class="card__photo">
-      <figure>
+      <figure on:dblclick={handleLike}>
         <img src={photo} alt="Pug" width="500" height="auto" loading="lazy" />
       </figure>
     </div>
 
     <div class="card__icons">
       <div class="card__icons_firts">
-        <span>
-          <Icon src={FaSolidHeart} />
+        <span on:click={handleLike} class:active-like={like}>
+          <Icon
+            src={like ? FaSolidHeart : FaHeart}
+            color={like ? "#bc1888" : ""}
+          />
         </span>
 
         <span on:click={handleClick}>
           <Icon src={FaSolidPaperPlane} />
         </span>
       </div>
-      <div class="card__icons_second">
-        <Icon src={FaSolidBookmark} />
+      <div class="card__icons_second" on:click={() => (bookmark = !bookmark)}>
+        <Icon src={bookmark ? FaSolidBookmark : FaBookmark} />
       </div>
     </div>
 
@@ -171,6 +186,7 @@
     animation: bounce linear 0.8s;
     animation-iteration-count: 1;
     transform-origin: 20% 20%;
+    display: inline-flex;
   }
   .active-bookmark {
     color: #f09433;
